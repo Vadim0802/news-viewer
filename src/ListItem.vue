@@ -15,12 +15,20 @@
     <button
       class="btn btn-primary"
       @click="showTextContent = !showTextContent"
-      @click.once="wasRead = true"
       :class="{ 'btn-secondary': wasRead }"
     >
       {{ showTextContent ? "Закрыть статью" : "Открыть статью" }}
     </button>
-    <p v-if="showTextContent">{{ news.description.repeat(5) }}</p>
+    <button
+      class="btn btn-primary"
+      v-if="showTextContent"
+      @click="wasRead = !wasRead"
+    >
+      Отметить как {{ wasRead ? "непрочитанное" : "прочитанное" }}
+    </button>
+    <div v-if="showTextContent">
+      <p>{{ news.description.repeat(5) }}</p>
+    </div>
   </div>
 </template>
 
@@ -41,3 +49,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn {
+  margin-right: 10px;
+}
+</style>
